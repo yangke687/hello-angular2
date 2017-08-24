@@ -52,7 +52,15 @@ import { Component, OnInit, Inject } from '@angular/core';
     </form>
   `,
   styles: [
-    'input { border: 1px solid #ccc; }',
+    `
+      input { border: 1px solid #ccc; }
+      .ng-valid input{
+        border: 1px solid green;
+      }
+      .ng-invalid input{
+        border: 1px solid red;
+      }
+    `,
   ],
 })
 export class LoginComponent implements OnInit {
