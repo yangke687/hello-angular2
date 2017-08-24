@@ -4,9 +4,9 @@ import { Component, OnInit, Inject } from '@angular/core';
   selector: 'app-login',
   template: `
     <div>
-      <input #usernameRef type="text" placeholder="Username">
+      <input [(ngModel)]="username" type="text" placeholder="Username">
       <br/>
-      <input #passwordRef type="password" placeholder="Password">
+      <input [(ngModel)]="password" type="password" placeholder="Password">
       <br/>
       <button (click)="onClick(usernameRef.value,passwordRef.value)">Login</button>
     </div>
@@ -22,9 +22,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  username: "";
+  password: "";
+
   onClick(username,password) {
     console.log(
-      this.service.loginWithCredentials(username, password)
+      this.service.loginWithCredentials(this.username, this.password)
     );
   }
 }
