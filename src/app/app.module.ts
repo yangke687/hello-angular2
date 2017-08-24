@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
 import { routing } from './app.routes';
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
     // 顶层组件
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
