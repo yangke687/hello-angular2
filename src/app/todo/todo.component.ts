@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from './todo.model';
+import { TodoService } from './todo.service'; 
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
+  // 引入todo service
+  providers: [TodoService]
 })
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   desc = '';
-  constructor() { }
+  constructor(private service: TodoService) { }
 
   ngOnInit() {
   }
 
   addTodo() {
-    this.todos.push({
-      id: 1,
-      desc: this.desc,
-      completed: false,
-    });
+    this.todos = this.service.addTodo(this.desc);
     this.desc = '';
   }
 }
