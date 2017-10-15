@@ -70,8 +70,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  username: "";
-  password: "";
+  //username: "";
+  //password: "";
 
   onSubmit(formValue) {
     console.log('form value:', formValue);
