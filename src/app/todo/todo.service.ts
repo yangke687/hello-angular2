@@ -12,7 +12,7 @@ export class TodoService {
   private headers  = new Headers({'content-type': 'application/json'});
 
   todos: Todo[]=[];
-  constructor( private http: Http ) { }
+  constructor( private http: Http ) { } // DI
 
   // POST /todos
   addTodo(todoItem:string): Promise<Todo> {
@@ -30,8 +30,32 @@ export class TodoService {
   }
 
   // PUT /todos/:id
-  toggleTodo() {
-    
+  toggleTodo(todo: Todo): Promise<Todo> {
+    const url = `${this.api_url}/${todo.id}`;
+    let updatedTodo = Object.assign({}, todo, {completed: !todo.completed});
+    return this.http
+      .put(url, JSON.stringify(updatedTodo), {headers: this.headers})
+      .toPromise()
+      .then(() => updatedTodo)
+      .catch(this.handleError);
+  }
+
+  // DELETE /todos/:id
+  deleteTodoById(id: string): Promise<void> {
+    const url = `${this.api_url}/${id}`;
+    return this.http
+      .delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null)
+      .catch(this.handleError);
+  }
+
+  // GET /todos
+  getTodos(): Promise<Todo[]>{
+    return this.http.get(this.api_url)
+      .toPromise()
+      .then(res => res.json().data as Todo[])
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
